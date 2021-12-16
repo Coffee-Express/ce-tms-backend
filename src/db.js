@@ -43,6 +43,16 @@ const userSchema = new Schema({
   }],
 });
 
+// Check if the account role is an employee or admin
+const employeeValidate = [
+  validate({
+    validator: 'equals',
+    arguments: ['employee' || 'admin', userSchema.role],
+    message: 'Must be an employee or admin to access!',
+    httpStatus: 400,
+  }),
+];
+
 // exporting userSchema to the user collection
 const User = model('User', userSchema, 'users');
 
